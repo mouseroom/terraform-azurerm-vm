@@ -231,6 +231,7 @@ resource "azurerm_availability_set" "vm" {
 }
 
 resource "azurerm_public_ip" "vm" {
+  allocation_method            = "${var.allocation_method}"
   count                        = "${var.nb_public_ip}"
   name                         = "${var.vm_hostname}-${count.index}-publicIP"
   location                     = "${var.location}"
