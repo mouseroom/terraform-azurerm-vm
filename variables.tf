@@ -109,6 +109,12 @@ variable "public_ip_address_allocation" {
   default     = "dynamic"
 }
 
+variable "allocation_method" {
+  description = "Defines how an IP address is assigned. Options are Static or Dynamic."
+  type        = string
+  default     = "Dynamic"
+}
+
 variable "nb_public_ip" {
   description = "Number of public IPs to assign corresponding to one IP per vm. Set to 0 to not assign any public IP addresses."
   default     = "1"
