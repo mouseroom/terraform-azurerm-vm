@@ -28,7 +28,6 @@ resource "azurerm_storage_account" "vm-sa" {
 }
 
 resource "azurerm_virtual_machine" "vm-linux" {
-  count                         = "${!contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer") && var.is_windows_image != "true" && var.data_disk == "false" ? var.nb_instances : 0}"
   name                          = "${var.vm_hostname}${count.index}"
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.vm.name}"
@@ -76,7 +75,6 @@ resource "azurerm_virtual_machine" "vm-linux" {
 }
 
 resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
-  count                         = "${!contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer")  && var.is_windows_image != "true"  && var.data_disk == "true" ? var.nb_instances : 0}"
   name                          = "${var.vm_hostname}${count.index}"
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.vm.name}"
@@ -132,7 +130,6 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
 }
 
 resource "azurerm_virtual_machine" "vm-windows" {
-  count                         = "${(((var.vm_os_id != "" && var.is_windows_image == "true") || contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer")) && var.data_disk == "false") ? var.nb_instances : 0}"
   name                          = "${var.vm_hostname}${count.index}"
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.vm.name}"
@@ -173,7 +170,6 @@ resource "azurerm_virtual_machine" "vm-windows" {
 }
 
 resource "azurerm_virtual_machine" "vm-windows-with-datadisk" {
-  count                         = "${((var.vm_os_id != "" && var.is_windows_image == "true") || contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer")) && var.data_disk == "true" ? var.nb_instances : 0}"
   name                          = "${var.vm_hostname}${count.index}"
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.vm.name}"
